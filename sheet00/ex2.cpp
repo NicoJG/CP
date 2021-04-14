@@ -4,14 +4,23 @@
 #include <fstream>
 using namespace std;
 
-float a(float x)
+float a0(float x)
 {
-    return 1 / sqrt(x) - 1 / sqrt(x + 1);
+    return (1-cos(x))/sin(x);
 }
+
+double a1(double x)
+{
+    return (1-cos(x))/sin(x);
+}
+
 
 int main() 
 {
     // a)
+
+    //float
+
     vector<float> x0 = {};
     for(float i=1000;i<1000000;i+=100)
     {
@@ -25,12 +34,14 @@ int main()
     
     for(float y:x0)
     {
-        file0 <<  y << "," << a(y) << endl;
-        y0.push_back(a(y));
+        file0 <<  y << "," << a0(y) << endl;
+        y0.push_back(a0(y));
     }
     file0.close();
 
-        vector<double> x1 = {};
+    //double
+
+    vector<double> x1 = {};
     for(double i=1000;i<1000000;i+=100)
     {
         x1.push_back(i);
@@ -43,17 +54,20 @@ int main()
     
     for(double y:x1)
     {
-        file1 <<  y << "," << a(y) << endl;
-        y1.push_back(a(y));
+        file1 <<  y << "," << a1(y) << endl;
+        y1.push_back(a1(y));
     }
     file1.close();
+
+
+    //difference
 
     ofstream diff;
     diff.open("build/diff.csv");
 
     for(int i=0; i <= y0.size(); i++)
     {
-        diff << y0[i]-y1[i] << endl;
+        diff << (double)y0[i]-y1[i]/(y1[i]) << endl;
     }
     
     diff.close();
