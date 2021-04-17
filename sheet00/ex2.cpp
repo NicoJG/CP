@@ -4,79 +4,81 @@
 #include <fstream>
 using namespace std;
 
-float a0(float x)
-{
-    return (1-cos(x))/sin(x);
-}
-
-double a1(double x)
-{
-    return (1-cos(x))/sin(x);
-}
-
-
 int main() 
 {
     // a)
+    float a_min = 1000;
+    float a_step = 100;
+    float a_max = 1000000;
 
-    //float
+    ofstream file_a;
+    file_a.open("build/ex2_a.csv");
+    file_a << "x,y_exact,y_rounded,y_better,rel_err_rounded,rel_err_better" << endl;
 
-    vector<float> x0 = {};
-    for(float i=1000;i<1000000;i+=100)
+    for(float x=a_min;x<=a_max;x+=a_step)
     {
-        x0.push_back(i);
-    }
+        double y_exact = 1./sqrt((double)x)-1/sqrt((double)x+1.);
+        float y_rounded = 1./sqrt(x)-1/sqrt(x+1.);
+        float y_better = (sqrt(x+1)-sqrt(x)) / (sqrt(x)*sqrt(x+1));
+        double rel_err_rounded = ((double)y_rounded - y_exact) / y_exact;
+        double rel_err_better = ((double)y_better - y_exact) / y_exact;
 
-    ofstream file0;
-    file0.open("build/ergebnisse1.csv");
+        file_a << x << "," << y_exact << "," << y_rounded << "," << y_better << "," << rel_err_rounded << "," << rel_err_better << endl;
+    } 
 
-    vector<float> y0 = {};
-    
-    for(float y:x0)
-    {
-        file0 <<  y << "," << a0(y) << endl;
-        y0.push_back(a0(y));
-    }
-    file0.close();
-
-    //double
-
-    vector<double> x1 = {};
-    for(double i=1000;i<1000000;i+=100)
-    {
-        x1.push_back(i);
-    }
-
-    ofstream file1;
-    file1.open("build/exakt1.csv");
-
-    vector<float> y1 = {};
-    
-    for(double y:x1)
-    {
-        file1 <<  y << "," << a1(y) << endl;
-        y1.push_back(a1(y));
-    }
-    file1.close();
-
-
-    //difference
-
-    ofstream diff;
-    diff.open("build/diff.csv");
-
-    for(int i=0; i <= y0.size(); i++)
-    {
-        diff << (double)y0[i]-y1[i]/(y1[i]) << endl;
-    }
-    
-    diff.close();
-
-    
-
+    file_a.close();
 
     // b)
+    
+    float b_min = 0.000001;
+    float b_step = 0.00001;
+    float b_max = 0.002;
 
+    ofstream file_b;
+    file_b.open("build/ex2_b.csv");
+    file_b << "x,y_exact,y_rounded,y_better,rel_err_rounded,rel_err_better" << endl;
+
+    for(float x=b_min;x<=b_max;x+=b_step)
+    {
+        double y_exact = (1.-cos((double)x))/sin((double)x);
+        float y_rounded = (1.-cos(x))/sin(x);
+        float y_better = tan(x/2.);
+        double rel_err_rounded = ((double)y_rounded - y_exact) / y_exact;
+        double rel_err_better = ((double)y_better - y_exact) / y_exact;
+
+        file_b << x << "," << y_exact << "," << y_rounded << "," << y_better << "," << rel_err_rounded << "," << rel_err_better << endl;
+    } 
+
+    file_b.close();
+    
+    // c)
+    
+    float c_x_min = 1;
+    float c_x_step = 10000;
+    float c_x_max = 1000000;
+    float c_delta_min = 0.000001;
+    float c_delta_step = 0.0001;
+    float c_delta_max = 0.02;
+
+    ofstream file_c;
+    file_c.open("build/ex2_c.csv");
+    file_c << "x,delta,y_exact,y_rounded,y_better,rel_err_rounded,rel_err_better" << endl;
+
+    for(float x=c_x_min;x<=c_x_max;x+=c_x_step)
+    {
+        for(float delta=c_delta_min;delta<=c_delta_max;delta+=c_delta_step)
+        {
+            double y_exact = sin((double)x+(double)delta)-sin((double)x);
+            float y_rounded = sin(x+delta)-sin(x);
+            float y_better = sin(x+delta)-sin(x);
+            double rel_err_rounded = ((double)y_rounded - y_exact) / y_exact;
+            double rel_err_better = ((double)y_better - y_exact) / y_exact;
+
+            file_c << x << "," << delta << "," << y_exact << "," << y_rounded << "," << y_better << "," << rel_err_rounded << "," << rel_err_better << endl;
+        }
+    } 
+
+    file_c.close();
     
     return 0;
 }

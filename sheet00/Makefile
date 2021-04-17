@@ -1,7 +1,7 @@
 all: exec
 
-exec: build/ex3
-	./build/ex3
+exec: build/ex2
+	./build/ex2
 
 build/ex3: ex3.cpp | build
 	g++ -O3 -ffast-math -march=native ex3.cpp -o build/ex3
