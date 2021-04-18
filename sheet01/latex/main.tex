@@ -1,0 +1,59 @@
+\documentclass{scrartcl}
+
+\include{packages.tex}
+
+\subject{Computational Physics\\2021 - TU Dortmund}
+\title{Solutions to Exercise Sheet 1}
+\author{
+    Nico Guth  \\
+    \href{mailto:nico.guth@tu-dortmund.de}{nico.guth@tu-dortmund.de}
+	\and
+	AUTOR B\\
+    \href{mailto:authorB@tu-dortmund.de}{authorB@tu-dortmund.de}
+	\and
+	AUTOR C\\
+    \href{mailto:authorC@tu-dortmund.de}{authorC@tu-dortmund.de}
+	}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\setcounter{section}{-1}
+\section{Comprehension questions}
+
+\subsection{What are the possibilities to solve systems of linear equations (with unique solution)?}
+
+System of linear equations: $\symbf{A} \overrightarrow{x}=\overrightarrow{b}$
+
+\begin{itemize}
+    \item Calculate the inverse matrix $\Rightarrow \overrightarrow{x} = \symbf{A}^{-1} \overrightarrow{b}$
+    \item Gauß algorithm
+    \item LU decomposition: $\symbf{A} = \symbf{P} \cdot \symbf{L} \cdot \symbf{U}$ \\
+        $\symbf{L}$ is a lower triangular matrix and $\symbf{U}$ is an upper triangular matrix. \\
+        $\symbf{P}$ is the "pivoting matrix" and satisfies $\symbf{P}^T=\symbf{P}^{-1}$. \\
+        $\Rightarrow ( \symbf{P} \cdot \underbrace{ ( \symbf{L} \cdot \overbrace{ ( \symbf{U} \cdot \overrightarrow{x} ) }^{\overrightarrow{y}\coloneqq} ) }_{\overrightarrow{z} \coloneqq} ) = \overrightarrow{b}$ \\
+        Then calculate $\overrightarrow{z} = \symbf{P}^T \cdot \overrightarrow{b}$ 
+        and then solve the systems of linear equations:  \\
+        $\symbf{L}\cdot\overrightarrow{y}=\overrightarrow{z}$ and $\symbf{U}\cdot\overrightarrow{x} = \overrightarrow{y}$
+    \item If the matrix $\symbf{A}$ is not a square matrix, multiply the system of equations with $\symbf{A}^T$ from the left. \\
+        Now $\tilde{\symbf{A}} \coloneqq \symbf{A}^T \cdot \symbf{A}$ is a square matrix.
+  \end{itemize}
+
+\subsection{Why is a pivoting strategy necessary in general?}
+
+??
+
+
+\section{Conclusions}\label{conclusions}
+There is no longer \LaTeX{} example which was written by \cite{doe}.
+
+
+\begin{thebibliography}{9}
+\bibitem[Doe]{doe} \emph{First and last \LaTeX{} example.},
+John Doe 50 B.C. 
+\end{thebibliography}
+
+\end{document}
