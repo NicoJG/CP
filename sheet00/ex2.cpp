@@ -53,12 +53,10 @@ int main()
     
     // c)
     
-    float c_x_min = 1;
-    float c_x_step = 10000;
+    float delta = 1;
+    float c_x_min = 1000;
+    float c_x_step = 100;
     float c_x_max = 1000000;
-    float c_delta_min = 0.000001;
-    float c_delta_step = 0.0001;
-    float c_delta_max = 0.02;
 
     ofstream file_c;
     file_c.open("build/ex2_c.csv");
@@ -66,16 +64,13 @@ int main()
 
     for(float x=c_x_min;x<=c_x_max;x+=c_x_step)
     {
-        for(float delta=c_delta_min;delta<=c_delta_max;delta+=c_delta_step)
-        {
-            double y_exact = sin((double)x+(double)delta)-sin((double)x);
-            float y_rounded = sin(x+delta)-sin(x);
-            float y_better = sin(x+delta)-sin(x);
-            double rel_err_rounded = ((double)y_rounded - y_exact) / y_exact;
-            double rel_err_better = ((double)y_better - y_exact) / y_exact;
+        double y_exact = sin((double)x+(double)delta)-sin((double)x);
+        float y_rounded = sin(x+delta)-sin(x);
+        float y_better = sin(x+delta)-sin(x);
+        double rel_err_rounded = ((double)y_rounded - y_exact) / y_exact;
+        double rel_err_better = ((double)y_better - y_exact) / y_exact;
 
-            file_c << x << "," << delta << "," << y_exact << "," << y_rounded << "," << y_better << "," << rel_err_rounded << "," << rel_err_better << endl;
-        }
+        file_c << x << "," << delta << "," << y_exact << "," << y_rounded << "," << y_better << "," << rel_err_rounded << "," << rel_err_better << endl;
     } 
 
     file_c.close();
