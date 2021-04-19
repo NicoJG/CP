@@ -1,0 +1,65 @@
+\section{Change of basis with LU decomposition}
+
+Primitive lattice vectors:
+\begin{align}
+    \vec{a}_1 &= 
+    \begin{pmatrix}
+        \frac{1}{2} \\[2pt] \frac{\sqrt{3}}{2} \\[2pt] 0
+    \end{pmatrix};
+    &
+    \vec{a}_2 &=
+    \begin{pmatrix}
+        -\frac{1}{2} \\[2pt] \frac{\sqrt{3}}{2} \\[2pt] 0
+    \end{pmatrix};
+    &
+    \vec{a}_3 &=
+    \begin{pmatrix}
+        0 \\
+        0 \\
+        1
+    \end{pmatrix}
+\end{align}
+
+% subsections with a) b) c) ...
+\renewcommand\thesubsection{\thesection.\alph{subsection})}
+
+\subsection{What kind of crystal system is represented?}
+
+sc
+
+\subsection{Defect at $\vec{b} = (2,0,2)^T$}
+
+Coordinate transformation matrix to ${\vec{a}_1,\vec{a}_2,\vec{a}_3}$:
+\begin{equation}
+    \symbf{A} = (\vec{a}_1,\vec{a}_2,\vec{a}_3)
+\end{equation}
+
+With the C++ module "Eigen::PartialPivLU" the LU decomposition yields:
+\begin{align}
+    \symbf{P} &= 
+    \begin{pmatrix}
+        0 & 1 & 0 \\
+        1 & 0 & 0 \\
+        0 & 0 & 1 
+    \end{pmatrix} \\
+    \symbf{L} &= 
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        0.577 & 1 & 0 \\
+        0 & 0 & 1 
+    \end{pmatrix} \\
+    \symbf{U} &= 
+    \begin{pmatrix}
+        0.866 & 0.866 & 0 \\
+        0 & -1 & 0 \\
+        0 & 0 & 1 
+    \end{pmatrix}
+\end{align}
+
+Solving $\symbf{A} \cdot \vec{x} = \vec{b}$ yields:
+\begin{equation}
+    \vec{x} = 
+    \begin{pmatrix*}[r]
+        2 \\ -2 \\ 2
+    \end{pmatrix*}
+\end{equation}
