@@ -23,18 +23,25 @@ Primitive lattice vectors:
 % subsections with a) b) c) ...
 \renewcommand\thesubsection{\thesection.\alph{subsection})}
 
+% a)
 \subsection{What kind of crystal system is represented?}
 
 sc
 
+% b)
 \subsection{Defect at $\vec{b} = (2,0,2)^T$}
 
 Coordinate transformation matrix to ${\vec{a}_1,\vec{a}_2,\vec{a}_3}$:
 \begin{equation}
-    \symbf{A} = (\vec{a}_1,\vec{a}_2,\vec{a}_3)
+    \symbf{A} = (\vec{a}_1,\vec{a}_2,\vec{a}_3) =
+    \begin{pmatrix}
+        0.5 & -0.5 & 0 \\
+        0.866 & 0.866 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}
 \end{equation}
 
-With the C++ module "Eigen::PartialPivLU" the LU decomposition yields:
+With the C++ module "Eigen::PartialPivLU" the LU decomposition yields
 \begin{align}
     \symbf{P} &= 
     \begin{pmatrix}
@@ -47,19 +54,69 @@ With the C++ module "Eigen::PartialPivLU" the LU decomposition yields:
         1 & 0 & 0 \\
         0.577 & 1 & 0 \\
         0 & 0 & 1 
-    \end{pmatrix} \\
+    \end{pmatrix} \\ \text{and} \\
     \symbf{U} &= 
     \begin{pmatrix}
         0.866 & 0.866 & 0 \\
         0 & -1 & 0 \\
         0 & 0 & 1 
-    \end{pmatrix}
+    \end{pmatrix} .
 \end{align}
 
-Solving $\symbf{A} \cdot \vec{x} = \vec{b}$ yields:
+Solving $\symbf{A} \cdot \vec{x} = \vec{b}$ yields 
 \begin{equation}
     \vec{x} = 
     \begin{pmatrix*}[r]
         2 \\ -2 \\ 2
-    \end{pmatrix*}
+    \end{pmatrix*} .
 \end{equation}
+
+% c)
+\subsection{Defect at $\vec{c} = (1,2\sqrt{3},3)^T$}
+
+Solving $\symbf{A} \cdot \vec{y} = \vec{c}$ yields
+\begin{equation}
+    \vec{y} = 
+    \begin{pmatrix}
+        3 \\ 1 \\ 3
+    \end{pmatrix} .
+\end{equation}
+
+% d)
+\subsection{LU decomposition for the basis ${\vec{a}_3,\vec{a}_2,\vec{a}_1}$}
+
+With the C++ module "Eigen::PartialPivLU" the LU decomposition of
+\begin{equation}
+    \symbf{A}_2 = (\vec{a}_3,\vec{a}_2,\vec{a}_1) =
+    \begin{pmatrix}
+        0 & -0.5 & 0.5 \\
+        0 & 0.866 & 0.866 \\
+        1 & 0 & 0 \\
+    \end{pmatrix}
+\end{equation}
+yields
+\begin{align}
+    \symbf{P}_2 &= 
+    \begin{pmatrix}
+        0 & 1 & 0 \\
+        1 & 0 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix} \\
+    \symbf{L}_2 &=
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & -0.577 & 1
+    \end{pmatrix} \\
+    \symbf{U}_2 &=
+    \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & 0.866 & 0.866 \\
+        0 & 0 & 1
+    \end{pmatrix} .
+\end{align}
+
+% e)
+\subsection{How does the problem simplify when the primitive lattice vectors are pairwise orthogonal?}
+
+??
