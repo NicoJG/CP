@@ -12,7 +12,7 @@ int main()
     Eigen::Matrix3d A;
     A << a1,a2,a3;
 
-    // a)
+    // b)
     Eigen::Vector3d b = {2,0,2};
 
     Eigen::PartialPivLU<Eigen::Matrix3d> lu = A.lu();
@@ -27,6 +27,6 @@ int main()
     cout << "LU:" << endl << LU << endl;
     cout << "x:" << endl << x << endl;
 
-    // b)
+    // c)
     return 0;
 }
