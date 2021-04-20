@@ -3,6 +3,7 @@ all: exec
 exec: build/exercise1 build/exercise2
 	./build/exercise1
 	./build/exercise2
+	python exercise2.py
 
 build/exercise1: exercise1.cpp | build
 	g++ -O3 -ffast-math -march=native exercise1.cpp -o build/exercise1
