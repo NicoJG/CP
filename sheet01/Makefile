@@ -1,4 +1,4 @@
-all: latex code
+all: code latex
 
 latex: 
 	make -C latex

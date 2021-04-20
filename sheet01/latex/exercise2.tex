@@ -3,6 +3,7 @@
 \begin{table}
     \centering
     \caption{data points $(x,y)$}
+    \label{tab:data_points}
     \begin{tabular}{c c c c c c c c c c c}
         \toprule
         x & 0 & 2.5 & -6.3 & 4 & -3.2 & 5.3 & 10.1 & 9.5 & -5.4 & 12.7 \\
@@ -11,6 +12,137 @@
     \end{tabular}
 \end{table}
 
-% a)
+% a) and b)
 \subsection{Problem formulation}
 
+To calculate a linear regression of the data points with
+\begin{equation}
+    y(x) = m \cdot x + n \, ,
+\end{equation}
+the squared error
+\begin{equation}
+    R = \sum_i (m \cdot x_i + n - y_i)^2
+\end{equation}
+has to be minimized.
+$R$ cannot have a local maximum so it is sufficient to calculate
+\begin{equation}
+    \vec{\nabla}_{m,n} R = 
+    \begin{pmatrix}
+        \frac{\partial R}{\partial m} \\
+        \frac{\partial R}{\partial n}
+    \end{pmatrix}
+    = 0 \, .
+\end{equation}
+\begin{align*}
+    & \vec{\nabla}_{m,n} R = \sum_i 
+    \begin{pmatrix}
+        2 m x_i^2 + 2 n x_i - 2 x_i y_i \\
+        2 n + 2 m x_i - 2 y_i
+    \end{pmatrix} \\
+    \Leftrightarrow & \sum_i 
+    \begin{pmatrix}
+        x_i^2 m + x_i n \\
+        x_i m + n
+    \end{pmatrix} = \sum_i 
+    \begin{pmatrix}
+        x_i y_i \\
+        y_i
+    \end{pmatrix} \\
+    \Leftrightarrow & \left( \sum_i 
+    \begin{pmatrix}
+        x_i^2 & x_i \\
+        x_i & 1
+    \end{pmatrix} \right) 
+    \begin{pmatrix}
+        m \\
+        n
+    \end{pmatrix} = \sum_i 
+    \begin{pmatrix}
+        x_i y_i \\
+        y_i
+    \end{pmatrix}
+\end{align*}
+So the problem can be formulated in the form
+\begin{equation}
+    \label{eq:system}
+    \symbf{A} \cdot \vec{m} = \vec{b} \, 
+\end{equation}
+with
+\begin{align*}
+    \symbf{A} &= 
+    \left( \sum_i 
+    \begin{pmatrix}
+        x_i^2 & x_i \\
+        x_i & 1
+    \end{pmatrix} \right) \\
+    \vec{m} &=
+    \begin{pmatrix}
+        m \\
+        n
+    \end{pmatrix} \\
+    \vec{b} &=
+    \begin{pmatrix}
+        x_i y_i \\
+        y_i
+    \end{pmatrix} \, .
+\end{align*}
+
+% c) and d)
+\subsection{Carrying out the linear regression}
+
+The given data points in \autoref{tab:data_points} yield the following:
+
+\begin{align*}
+    \symbf{A} &=
+    \begin{pmatrix}
+        482.98 & 29.2 \\
+        29.2 & 10
+    \end{pmatrix}\\
+    \vec{b} &=
+    \begin{pmatrix}
+        541.22 \\
+        54.6
+    \end{pmatrix}
+\end{align*}
+
+Now the LU decomposition yields
+\begin{align*}
+    \symbf{P} &=
+    \begin{pmatrix}
+        1 & 0 \\
+        0 & 1
+    \end{pmatrix} \\
+    \symbf{L} &=
+    \begin{pmatrix}
+        1 & 0 \\
+        0.060458 & 1
+    \end{pmatrix} \\
+    \symbf{U} &=
+    \begin{pmatrix}
+        482.98 & 29.2 \\
+        0 & 8.23463
+    \end{pmatrix} \, .
+\end{align*}
+
+And solving the system of linear equations \autoref{eq:system} yields
+\begin{equation}
+    \vec{m} = 
+    \begin{pmatrix}
+        m \\ 
+        n
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        0.959951 \\ 
+        2.65694
+    \end{pmatrix} \, .
+\end{equation}
+
+Using these parameters $m$ and $n$ to plot a linear regression yields \autoref{fig:plot_exercise2}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{../code/build/plot_exercise2.pdf}
+    \caption{Plot of the linear regression}
+    \label{fig:plot_exercise2}
+\end{figure}

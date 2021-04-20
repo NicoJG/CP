@@ -15,8 +15,8 @@ params,pcov = curve_fit(f,x,y)
 print(f"C++ linear regression: \t m = {m}; n = {n}")
 print(f"Python curve_fit: \t m = {params[0]:.6f}; n = {params[1]:.5f}")
 
-plt.xlabel("x")
-plt.ylabel("y")
+plt.xlabel("$x$")
+plt.ylabel("$y$")
 
 plt.plot(x,f(x,m,n),'b-', label="C++ linear regression")
 plt.plot(x,y,'ko', label="data points")
