@@ -26,7 +26,7 @@ Primitive lattice vectors:
 % a)
 \subsection{What kind of crystal system is represented?}
 
-sc
+hcp
 
 % b)
 \subsection{Defect at $\vec{b} = (2,0,2)^T$}
@@ -74,6 +74,9 @@ Solving $\symbf{A} \cdot \vec{x} = \vec{b}$ yields
 % c)
 \subsection{Defect at $\vec{c} = (1,2\sqrt{3},3)^T$}
 
+You can reuse the LU decomposition which has a complexity of $O(N^3)$.
+You have to inversly solve the lse which has a complexity of $O(N^2)$.
+
 Solving $\symbf{A} \cdot \vec{y} = \vec{c}$ yields
 \begin{equation}
     \vec{y} = 
@@ -98,9 +101,9 @@ yields
 \begin{align}
     \symbf{P}_2 &= 
     \begin{pmatrix}
+        0 & 0 & 1 \\
         0 & 1 & 0 \\
-        1 & 0 & 0 \\
-        0 & 0 & 1
+        1 & 0 & 0 
     \end{pmatrix} \\
     \symbf{L}_2 &=
     \begin{pmatrix}
@@ -116,7 +119,11 @@ yields
     \end{pmatrix} .
 \end{align}
 
+The numeric values stay the same as in b) but the position of these values change their position.
+
 % e)
 \subsection{How does the problem simplify when the primitive lattice vectors are pairwise orthogonal?}
 
-??
+When the matrix $\symbf{A}$ is orthogonal, its inverse is just the transposed matrix
+and the LU decomposition is not necessary.
+One can simply calculate $\vec{x} = \symbf{A}^{-1} \cdot \vec{b}$.
