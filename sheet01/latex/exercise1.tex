@@ -31,7 +31,7 @@ hcp
 % b)
 \subsection{Defect at $\vec{b} = (2,0,2)^T$}
 
-Coordinate transformation matrix to ${\vec{a}_1,\vec{a}_2,\vec{a}_3}$:
+Coordinate transformation matrix to $\{\vec{a}_1,\vec{a}_2,\vec{a}_3\}$:
 \begin{equation}
     \symbf{A} = (\vec{a}_1,\vec{a}_2,\vec{a}_3) =
     \begin{pmatrix}
@@ -75,7 +75,7 @@ Solving $\symbf{A} \cdot \vec{x} = \vec{b}$ yields
 \subsection{Defect at $\vec{c} = (1,2\sqrt{3},3)^T$}
 
 You can reuse the LU decomposition which has a complexity of $O(N^3)$.
-You have to inversly solve the lse which has a complexity of $O(N^2)$.
+You have to inversly solve the SLE which has a complexity of $O(N^2)$.
 
 Solving $\symbf{A} \cdot \vec{y} = \vec{c}$ yields
 \begin{equation}
@@ -86,7 +86,7 @@ Solving $\symbf{A} \cdot \vec{y} = \vec{c}$ yields
 \end{equation}
 
 % d)
-\subsection{LU decomposition for the basis ${\vec{a}_3,\vec{a}_2,\vec{a}_1}$}
+\subsection{LU decomposition for the basis $\{\vec{a}_3,\vec{a}_2,\vec{a}_1\}$}
 
 With the C++ module "Eigen::PartialPivLU" the LU decomposition of
 \begin{equation}

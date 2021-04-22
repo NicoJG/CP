@@ -39,31 +39,35 @@ int main()
     cout << "y:" << endl << y << endl;
     
     // c)
-    Eigen::Matrix2d A;
-    Eigen::Vector2d b;
-    A << x.dot(x), x.sum(), 
-        x.sum(), x.size();
-    b << x.dot(y), y.sum();
-
-    Eigen::PartialPivLU<Eigen::Matrix2d> lu = A.lu();
-
-    Eigen::Matrix2d P = lu.permutationP();
-    Eigen::Matrix2d LU = lu.matrixLU();
-
-    Eigen::Vector2d mn = lu.solve(b);
+    Eigen::VectorXd ones = Eigen::VectorXd::Ones(x.size());
+    Eigen::MatrixXd A(x.size(),2);
+    A << x, ones;
+    Eigen::MatrixXd A_T = A.transpose();
+    Eigen::MatrixXd P = A_T*A;
+    Eigen::VectorXd b = A_T * y;
 
     cout << "A:" << endl << A << endl;
     cout << "P:" << endl << P << endl;
-    cout << "LU:" << endl << LU << endl;
     cout << "b:" << endl << b << endl;
-    cout << "mn:" << endl << mn << endl;
+
+    Eigen::PartialPivLU<Eigen::MatrixXd> lu = P.lu();
+
+    Eigen::MatrixXd P_LU = lu.permutationP();
+    Eigen::MatrixXd LU = lu.matrixLU();
+
+    cout << "P_LU:" << endl << P_LU << endl;
+    cout << "LU:" << endl << LU << endl;
+
+    Eigen::VectorXd m = lu.solve(b);
+
+    cout << "m:" << endl << m << endl;
 
     // save m and n for Python
     ofstream file2("build/exercise2_mn.csv");
     if(file2.is_open())
     {
         file2 << "m,n" << endl;
-        file2 << mn(0) << "," << mn(1) << endl;
+        file2 << m(0) << "," << m(1) << endl;
     }
     file2.close();
 

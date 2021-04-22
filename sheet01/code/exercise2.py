@@ -18,7 +18,7 @@ print(f"Python curve_fit: \t m = {params[0]:.6f}; n = {params[1]:.5f}")
 plt.xlabel("$x$")
 plt.ylabel("$y$")
 
-plt.plot(x,f(x,m,n),'b-', label="C++ linear regression")
+plt.plot(x,f(x,m,n),'b-', label="linear regression")
 plt.plot(x,y,'ko', label="data points")
 
 plt.tight_layout()
