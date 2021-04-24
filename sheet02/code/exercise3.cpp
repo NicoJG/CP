@@ -30,5 +30,22 @@ int main()
         }
         
     }
+
+    // a vectors to A matrix
+    Eigen::MatrixXd A(4,a.size());
+    for(int i=0; i<a.size(); i++)
+    {
+        A.col(i) = a[i];
+    }
+    cout << "A:" << endl << A << endl;
+
+    // perform SVD
+    Eigen::BDCSVD<Eigen::MatrixXd> svd = A.bdcSvd(Eigen::ComputeFullU);
+    Eigen::MatrixXd U = svd.matrixU();
+    Eigen::VectorXd W = svd.singularValues();
+
+    cout << "U (ONB of the a vetors):" << endl << U << endl;
+    cout << "W:" << endl << W << endl;
+
     return 0;
 }
