@@ -32,4 +32,4 @@ for k in ks:
         break
 
 plt.tight_layout()
-plt.show()
+plt.savefig("build/plot_exercise1.pdf")
