@@ -8,7 +8,7 @@ using namespace std;
 // saves the given matrix to a csv file and returns whether it was successful or not
 bool writeCSV(string fileName, Eigen::MatrixXd  matrix, int precision)
 {
-    const static Eigen::IOFormat CSVFormat(precision, Eigen::DontAlignCols, ",", "\n");
+    Eigen::IOFormat CSVFormat(precision, Eigen::DontAlignCols, ",", "\n");
     try {
         ofstream file(fileName);
         if (file.is_open())
