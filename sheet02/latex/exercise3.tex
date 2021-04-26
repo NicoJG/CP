@@ -1,3 +1,33 @@
 \section{Construction of an orthonormal basis using SVD}
 
+Given are ten four dimensional vectors $\vec{a}_i$ which are put into the columns of the $\underline{A}$ matrix
 
+\begin{equation*}
+    \underline{A} =
+    \begin{pmatrix}
+        \csvreader[no head,column count=10,late after line=\\]{../code/build/exercise3_A.csv}{}{\csvlinetotablerow}
+    \end{pmatrix} \, .
+\end{equation*}
+
+Now the singular value decomposition is performed using the C++ module \\
+\mbox{"Eigen::BDCSVD"} and yields
+
+\begin{align*}
+    \underline{U} &=
+    \begin{pmatrix}
+        \csvreader[no head,column count=4,late after line=\\]{../code/build/exercise3_U.csv}{}{\csvlinetotablerow}
+    \end{pmatrix} \, , \\
+    \vec{W} &=
+    \begin{pmatrix}
+        \csvreader[no head,column count=1,late after line=\\]{../code/build/exercise3_W.csv}{}{\csvlinetotablerow}
+    \end{pmatrix}
+\end{align*}
+and
+\begin{equation*}
+    \underline{V} =
+    \begin{pmatrix}
+        \csvreader[no head,column count=10,late after line=\\]{../code/build/exercise3_V.csv}{}{\csvlinetotablerow}
+    \end{pmatrix}
+\end{equation*}
+
+The columns of $\underline{U}$ are the orthonormal basis vectors of the space spanned by the columns of $\underline{A}$.
