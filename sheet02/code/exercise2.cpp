@@ -10,7 +10,7 @@ int main()
 {
     // b) Profiling (Timing)
     int maxN = 1000;
-    int numberOfTimers = 5;
+    int numberOfTimers = 3;
     vector<vector<double>> t(numberOfTimers);
     for(int i=0; i<numberOfTimers; i++) t[i] = vector<double>(maxN);
     vector<int> Ns(maxN);
@@ -42,19 +42,6 @@ int main()
         Eigen::VectorXd x = lu.solve(b);
 
         Profiler::stop(2);
-        Profiler::start(3);
-
-        // a.2) LU decomposition (FullPivLU)
-        Eigen::FullPivLU<Eigen::MatrixXd> lu_full = M.fullPivLu();
-
-        Profiler::stop(3);
-        Profiler::start(4);
-
-        // a.3) solve the sle (FullPivLU)
-        Eigen::VectorXd x_full = lu_full.solve(b);
-
-        Profiler::stop(4);
-        
 
         // save the timing data
         Ns[N-1] = N;
@@ -67,7 +54,7 @@ int main()
     file.open("build/exercise3_timing_data.csv");
     if(file.is_open())
     {
-        file << "N,t_1[s],t_2_partial[s],t_3_partial[s],t_2_full[s],t_3_full[s]" << endl;
+        file << "N,t_1[s],t_2[s],t_3[s]" << endl;
         for(int i=0;i<Ns.size();i++)
         {
             file << Ns[i];
