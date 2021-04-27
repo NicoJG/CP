@@ -11,8 +11,8 @@ exercise2: build/exercise2
 	./build/exercise2
 	python exercise2.py
 
-build/exercise2: exercise2.cpp | build
-	g++ -O3 -ffast-math -march=native exercise2.cpp -o build/exercise2
+build/exercise2: exercise2.cpp profiler.cpp profiler.h | build
+	g++ -O3 -ffast-math -march=native exercise2.cpp profiler.cpp -o build/exercise2
 
 exercise3: build/exercise3
 	./build/exercise3
