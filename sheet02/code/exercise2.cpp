@@ -9,17 +9,18 @@ using namespace std;
 int main()
 {
     // b) Profiling (Timing)
-    int maxN = 1000;
+    int maxn = 1000;
     int numberOfTimers = 3;
     vector<vector<double>> t(numberOfTimers);
-    for(int i=0; i<numberOfTimers; i++) t[i] = vector<double>(maxN);
-    vector<int> Ns(maxN);
+    for(int i=0; i<numberOfTimers; i++) t[i] = vector<double>(maxn);
+    vector<int> Ns(maxn);
     Profiler::init(numberOfTimers);
 
     cout << "Starting Profiling" << endl;
-    for(int N=1; N<=maxN; N++)
+    for(int n=0; n<maxn; n++)
     {
-        cout << "N=" << N << "\r";
+        int N = n+1;
+        cout << "n=" << n << "\t N=" << N << "\r";
         cout.flush();
         
         // a)
@@ -44,7 +45,7 @@ int main()
         Profiler::stop(2);
 
         // save the timing data
-        Ns[N-1] = N;
+        Ns[n] = N;
         for(int i=0; i<numberOfTimers; i++) t[i][N] = Profiler::getTimeInS(i);
     }
     cout << endl;
@@ -55,7 +56,7 @@ int main()
     if(file.is_open())
     {
         file << "N,t_1[s],t_2[s],t_3[s]" << endl;
-        for(int i=0;i<Ns.size();i++)
+        for(int i=0;i<maxn;i++)
         {
             file << Ns[i];
             for(int j=0; j<numberOfTimers; j++)
