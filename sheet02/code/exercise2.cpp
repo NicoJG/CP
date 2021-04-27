@@ -10,10 +10,11 @@ int main()
 {
     // b) Profiling (Timing)
     int maxN = 1000;
-    vector<vector<double>> t(3);
-    for(int i=0;i<3;i++) t[i] = vector<double>(maxN);
+    int numberOfTimers = 5;
+    vector<vector<double>> t(numberOfTimers);
+    for(int i=0; i<numberOfTimers; i++) t[i] = vector<double>(maxN);
     vector<int> Ns(maxN);
-    Profiler::init(3);
+    Profiler::init(numberOfTimers);
 
     cout << "Starting Profiling" << endl;
     for(int N=1; N<=maxN; N++)
@@ -31,22 +32,33 @@ int main()
         Profiler::stop(0);
         Profiler::start(1);
 
-        // a.2) LU decomposition
+        // a.2) LU decomposition (PartialPivLU)
         Eigen::PartialPivLU<Eigen::MatrixXd> lu = M.lu();
-        Eigen::MatrixXd P = lu.permutationP();
-        Eigen::MatrixXd LU = lu.matrixLU();
 
         Profiler::stop(1);
         Profiler::start(2);
 
-        // a.3) solve the sle
+        // a.3) solve the sle (PartialPivLU)
         Eigen::VectorXd x = lu.solve(b);
 
         Profiler::stop(2);
+        Profiler::start(3);
+
+        // a.2) LU decomposition (FullPivLU)
+        Eigen::FullPivLU<Eigen::MatrixXd> lu_full = M.fullPivLu();
+
+        Profiler::stop(3);
+        Profiler::start(4);
+
+        // a.3) solve the sle (FullPivLU)
+        Eigen::VectorXd x_full = lu_full.solve(b);
+
+        Profiler::stop(4);
+        
 
         // save the timing data
         Ns[N-1] = N;
-        for(int i=0;i<3;i++) t[i][N] = Profiler::getTimeInS(i);
+        for(int i=0; i<numberOfTimers; i++) t[i][N] = Profiler::getTimeInS(i);
     }
     cout << endl;
     
@@ -55,10 +67,15 @@ int main()
     file.open("build/exercise3_timing_data.csv");
     if(file.is_open())
     {
-        file << "N,t_0[s],t_1[s],t_2[s]" << endl;
+        file << "N,t_1[s],t_2_partial[s],t_3_partial[s],t_2_full[s],t_3_full[s]" << endl;
         for(int i=0;i<Ns.size();i++)
         {
-            file << Ns[i] << "," << t[0][i] << "," << t[1][i] << "," << t[2][i] << endl;
+            file << Ns[i];
+            for(int j=0; j<numberOfTimers; j++)
+            {
+                file << "," << t[j][i];
+            }
+            file << endl;
         }
     }
     file.close();
