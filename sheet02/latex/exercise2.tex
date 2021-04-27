@@ -1,3 +1,20 @@
-\section{...}
+\section{ Profiling for the study of an algorithm}
 
-\subsection{....}
+\subsection{}
+\subsection{}
+Figure \autoref{fig:plot_exercise2} contains the three different times for the three different steps declared in a).
+The time is plotted against the size $N$ of the matrix.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../code/build/ex02_plots.pdf}
+    \caption{Computation time plotted against the size $N$ of the matrix on a double logarithmic scale, where the index i declare the step number from a)}
+    \label{fig:plot_exercise2}
+\end{figure}
+
+\subsection{}
+i) The runtime for $N= 1000000$ should be arround $10^{14}$ seconds for the second step in a).\\
+ii) The LU-Decomposition with Eigen takes the longest time. Choosing a different, more efficient algorithm would decrease the computation time.
+\subsection{}
+
+At a certain size of $N$ the matrix should become so large that it cannot be handled as a whole without causing memory errors.
