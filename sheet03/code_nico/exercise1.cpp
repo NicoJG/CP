@@ -32,10 +32,10 @@ int main()
     VectorXd l = VectorXd::LinSpaced(N-1,1,N-1);
     l.array() = (5-l.array()).abs()+1;
 
-    cout << "m:" << endl << m << endl;
-    cout << "k:" << endl << k << endl;
-    cout << "l:" << endl << l << endl;
+    cout << "m:" << endl << m.transpose() << endl;
+    cout << "k:" << endl << k.transpose() << endl;
+    cout << "l:" << endl << l.transpose() << endl;
 
-    cout << "eigenfrequencies:" << endl << eigenfrequencies(N,m,k,l) << endl;
+    cout << "eigenfrequencies:" << endl << eigenfrequencies(N,m,k,l).transpose() << endl;
     return 0;
 }
