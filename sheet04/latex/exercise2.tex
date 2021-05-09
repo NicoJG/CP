@@ -1,0 +1,79 @@
+\section{Exercise 2: Multidimensional integrals in electrostatics}
+The electrostatic potential alongside the $x-$axis is given by
+\begin{align}
+    \phi = \frac{1}{4 \pi \epsilon_0} \int \text{d}x' \int \text{d}y' \int \text{d}y' \frac{\rho(x', y', z')}{\sqrt{(x - x')^2 + y'^2 + z'^2}}
+\end{align}
+and with the substition $\bar{x}_i = \frac{x'_i}{a}$ and $\text{d}x'_i=a\text{d}\bar{x}_i$ you get 
+\begin{align}
+    \phi &= \frac{a^2}{4 \pi \epsilon_0} \int_{-1}^1 \text{d}\bar{x} \int_{-1}^1 \text{d}\bar{y} \int_{-1}^1 \text{d}\bar{z} \frac{\rho(\bar{x}, \bar{y}, \bar{z})}{\sqrt{(\frac{x}{a} - \bar{x})^2 + \bar{y}^2 + \bar{z}^2}}.
+    % &= \phi_0 \int_{-1}^1 \text{d}\bar{x} \int_{-1}^1 \text{d}\bar{y} \int_{-1}^1 \text{d}\bar{z} \frac{1}{\left| \vec{r} - \vec{\bar{r}} \right|} 
+\end{align}
+To calculate the electrostatic potential at a given point $\vec{r}$ we assume, that the point is at a large distance $\vec{r}'$ from the charge distribution. With help of the binomial expansion of the Coulomb potential, the potential $\phi$ can be expanded to
+\begin{align}
+    \phi(\vec{r}) = \phi_{\text{mon}}(\vec{r}) + \phi_{\text{dip}}(\vec{r}) +\phi_{\text{quad}}(\vec{r}) +...
+\end{align}
+with the monopole and dipole moments:
+\begin{align}
+    \phi_{\text{mon}}(\vec{r}) &= \frac{1}{4\pi \epsilon_0 r} \int_{V'} \rho(\vec{r}') \text{d}V' \\
+    \phi_{\text{dip}}(\vec{r}) &= \frac{1}{4\pi \epsilon_0 r^2} \int_{V'} \rho(\vec{r}') ( \hat{\vec{r}} \cdot \vec{r}' ) \text{d}V', \, \hat{\vec{r}} = \frac{\vec{r}}{r}.
+\end{align}
+
+\subsection{Homogeneous charge distribution}
+The homogeneous charge distribution is given by
+\begin{align}
+    \rho_1 (x,y,z) = \begin{cases}
+        \rho_0, \, |x| < a, |y| < a, |z| < a \\
+        0, \, \text{else} 
+    \end{cases}
+\end{align}
+which yields the monopole moment
+\begin{align}
+    \phi_{\text{mon}}(r) = \frac{a^2}{4 \pi \epsilon_0} \frac{1}{r} \int_{-1}^1 \text{d}\bar{x} \int_{-1}^1 \text{d}\bar{y} \int_{-1}^1 \text{d}\bar{z} \rho_0.
+\end{align}
+With
+\begin{align}
+    \vec{r} = 
+    \begin{pmatrix}
+    \frac{x}{a} \\
+    0 \\
+    0    
+    \end{pmatrix} \, \, \text{and} \,\, \hat{\vec{r}}\begin{pmatrix}
+        \bar{x} \\
+        -\bar{y} \\
+        -\bar{z}
+    \end{pmatrix}
+\end{align}
+it follows
+\begin{align}
+    \phi_{\text{mon}}(x) = \frac{a^2 \rho_0}{4 \pi \epsilon_0} \frac{8}{|x|} \overset{x > 0}{=} \phi_0 \frac{8}{x}.
+\end{align}
+For values $\frac{x}{a} \in 0.1\cdot\left\{0, ..., 80  \right\} $, Fig.\ref{fig:ex02_a} shows the potential inside, the potential outside and the analytically estimated potenial.  For the values  $\frac{x}{a} \in 0.1\cdot\left\{0, ..., 10  \right\}$ the denominator gets close to zero, for $n \rightarrow 10$. The easiest way to solve this problem is, to add a small value to the denominator.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{../code/build/ex02_a.pdf}
+    \caption{Potential inside and outside the cube and the analytically estimated potential for $\rho_1$.}
+    \label{fig:ex02_a}
+\end{figure}
+
+\subsection{Different charge distribution}
+For the charge distribution 
+\begin{align}
+    \rho_2 (x,y,z) = \begin{cases}
+        \rho_0 \frac{x}{a}, \, |x| < a, |y| < a, |z| < a \\
+        0, \, \text{else} 
+    \end{cases}
+\end{align}
+the monopole moment vanishes. The dipole moment is than given by
+\begin{align}
+    \phi_{\text{dip}}(r) &= \frac{a^2}{4 \pi \epsilon_0} \frac{\rho_0}{r^3} \int_{-1}^1 \text{d}\bar{x} \int_{-1}^1 \text{d}\bar{y} \int_{-1}^1 \text{d}\bar{z} \, x\cdot \bar{x}^2 \\
+    &=\frac{a^5 \rho_0}{4 \pi \epsilon_0} \frac{8}{3 x^2} = \phi_0 \frac{8}{3x^2}.
+\end{align}
+Fig.\ref{fig:ex02_b} shows the potential inside, the potential outside and the analytically estimated potenial
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{../code/build/ex02_b.pdf}
+    \caption{Potential inside and outside the cube and the analytically estimated potential for $\rho_2$.}
+    \label{fig:ex02_b}
+\end{figure}
