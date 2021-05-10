@@ -79,16 +79,22 @@ double integrate(double(* func_int)(double (* func)(double), double, double, int
 
 int main()
 {
+    double exact_f = 0.219384;
+    double exact_g = 0.37853;
     double err = 1e-4;
     //adding err to lower limit, because of isolated singularity
     double I_1_mid = integrate(midpoint, f, 1, 100, err);
+   
     double I_2_mid = integrate(midpoint, g, 0+err, 1, err);
-
+    
     double I_1_trap = integrate(trapezoidal, f, 1, 100, err);
+    
     double I_2_trap = integrate(trapezoidal, g, 0+err, 1, err);
-
+    
     double I_1_simp = integrate(simpson, f, 1, 100, err);
+    
     double I_2_simp = integrate(simpson, g, 0+err, 1, err);
+    
 
     return 0;
 }

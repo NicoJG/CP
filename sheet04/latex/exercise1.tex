@@ -1,2 +1,53 @@
-\section{}
+\section{ Integration routines and one-dimensional integrals}
+The functions to be integrated were:
+\begin{equation}
+I_1 = int_{1}^{100} \frac{\exp(-x)}{x} dx =  0.219384
+\end{equation}
+\begin{equation}
+I_2 = int_{0}^{1} x \sin{\frac{1}{x}} dx = 0.37853 .
+\end{equation}
+The implemented test routines have been tested by halving the interval width until the relative change of the result becomes smaller than $10^{-4}$.
+\subsection{Trapezodial Rule}
+\begin{table}[h]
+    \centering
+    \caption{Results for the trapezodial rule}
+    \label{tab:freq}
+    \begin{tabular}{ccc}
+        \toprule
+        Integral & \# of Iterations & Result\\
+        \midrule
+        $I_1$ & $13$ &  $0.219386$ \\
+        $I_2$ & $10$ &  $0.378526$ \\
+        \bottomrule
+    \end{tabular}
+\end{table}
 
+\subsection{Midpoint Rule}
+\begin{table}[h]
+    \centering
+    \caption{Results for the midpoint rule}
+    \label{tab:freq}
+    \begin{tabular}{ccc}
+        \toprule
+        Integral & \# of Iterations & Result\\
+        \midrule
+        $I_1$ & $12$ &  $0.219379$ \\
+        $I_2$ & $14$ &  $0.378504$ \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{Simpsons's Rule}
+\begin{table}[h]
+    \centering
+    \caption{Results for the Simpsons's rule}
+    \label{tab:freq}
+    \begin{tabular}{ccc}
+        \toprule
+        Integral & \# of Iterations & Result\\
+        \midrule
+        $I_1$ & $9$ &  $0.219384$\\
+        $I_2$ & $10$ &  $0.378525$ \\
+        \bottomrule
+    \end{tabular}
+\end{table}
