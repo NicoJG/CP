@@ -1,2 +1,30 @@
 \section{One-dimensional minimization method}
+The interval bisection and the newton methods are implemented according to the lecture. The test function is given by
+\begin{align}
+    f(x) = x^2 - 2
+\end{align}
+and the accuracy bound by $x_c = 10^{-9}$. The results of both methods, and the analytically calculated minimum, are shown in Tab.\ref{tab:1}. The function itself is shown in Fig.\ref{fig:ex03}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{ccc}
+		\toprule
+		method& $i$ &  $x_{\min}$\\
+		\midrule
+        analytically & & 0\\
+        bisection &33&$3.72529 \cdot 10^{-10}$\\
+        newton &1& $1.15463 \cdot 10^{-14}$ \\
+		\bottomrule \\
+	\end{tabular}
+	\caption{Iteration numbers and function minima.}
+	\label{tab:1}
+\end{table}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../code/build/ex03.pdf}
+    \caption{Function and results from both methods.}
+    \label{fig:ex03}
+\end{figure}
 
