@@ -1,0 +1,29 @@
+\section{Fourier transform}
+The continuous Fourier transformation is defined as 
+\begin{align}
+    F(k) = \frac{1}{2 \pi} \int_{-\infty}^{\infty} f(x) \exp (ikx) \text{d}x,
+\end{align}
+whereas the discrete Fourier transformation is given by
+\begin{align}
+    F_j = \sum_{\ell=0}^{N-1} \Omega_N^{j,\ell} f_\ell.
+\end{align}
+The fast Fourier transformation, with $N=2^m$ discretization points, for the discrete function
+\begin{align}
+    f_{\ell} = \sqrt{1 +\ell},
+\end{align}
+with $f: \mathbb{R} \rightarrow \mathbb{C}$, is implemented according to the lecture. Fig.\ref{fig:ex02_m3} shows the comparison of the real and imaginary part of the direct evaluation with the fast Fourier transformation for $m=3$. Fig.\ref{fig:ex02_m4} shows the comparison for $m=4$.\\
+It can be seen, that the values are in agreement with each other.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{../code/build/ex02_m3.pdf}
+    \caption{Comparison of real and imaginary part for $m=3$. }
+    \label{fig:ex02_m3}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{../code/build/ex02_m4.pdf}
+    \caption{Comparison of real and imaginary part for $m=4$. }
+    \label{fig:ex02_m4}
+\end{figure}
