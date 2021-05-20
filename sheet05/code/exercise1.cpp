@@ -15,7 +15,7 @@ double I_2(double x)
 }
 double I_3(double x)
 {
-    return sin(1 / x) / x;
+    return sin( x ) / x;
 }
 
 double trapezoidal(double(* func)(double), double a, double b, int N)
@@ -64,7 +64,7 @@ int main()
     
     std::cout <<"I_2:trap "<< trapezoidal(I_2,0,100,1e7) << std::endl;// error should not be to high with x_max=100 because e^(-100) is already 10^-44
     
-    std::cout <<"I_3:mid "<< - midpoint(I_3,1,0,1e5) - midpoint(I_3,0,1,1e5)<< std::endl;//midpoint bc its belongs to the OCN and ignores the singularity
+    std::cout <<"I_3:mid "<< 2 * (midpoint(I_3,0,1,1e5) + midpoint(I_3,1,10000,1e5)); //midpoint bc its belongs to the OCN and ignores the singularity
     
     return 0;   
 }

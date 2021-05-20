@@ -1,1 +1,23 @@
 \section{One dimensional Integrals}
+\subsection{a)}
+The trapezoidal rule was chosen the integrate the function.
+Switching the starting and end point yielded the correct result of $I_1 \approx 2.11559$.
+\subsection{b)}
+The trapezoidal rule was chosen the integrate the function.
+The upperbound was set at $x_{max}=100$ because the function already returns a value of $f(100)\approx 10^{-44}$.
+\begin{equation}
+I_2 = \int_{0}^{\infty} \frac{\exp(-t)}{\sqrt{t}} dt \approx \int_{0}^{100} \frac{\exp(-t)}{\sqrt{t}} dt \approx  1.76784
+\end{equation}
+The error of the trapezoidal rule cannot be used here since we don't want to evaluate the error we made by solving the integral numerically but rather the error we receive by setting an upper bound limit.
+\subsection{c)}
+\begin{equation}
+I_3 = \int_{-\infty}^{\infty} \frac{\sin{t}}{t} dt
+\end{equation}
+We exploit the symmetry of the integral to rewrite it to
+\begin{equation}
+I_3 = 2\cdot\int_{0}^{\infty} \frac{\sin{t}}{t} dt .
+\end{equation}
+After that it can be divided and for the second integral we set an upper bound $x_{max}=10000$.
+\begin{equation}
+I_3 = 2\cdot[\int_{0}^{1} \frac{\sin{t}}{t} dt + \int_{1}^{\infty} \frac{\sin{t}}{t} dt] \approx 2\cdot[\int_{0}^{1} \frac{\sin{t}}{t} dt + \int_{1}^{10000} \frac{\sin{t}}{t} dt] \approx \pi
+\end{equation}
