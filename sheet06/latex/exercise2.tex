@@ -1,3 +1,44 @@
-\section{...}
+\section{Multidimensional minimization}
 
-\subsection{....}
+\subsection{a)}
+The gradient method and conjugate gradient method were implemented according by the lecture.
+The optimal stepsize was calculated with the newton method from the last sheet.
+However, the newton method did not always converge.
+We have tried to fix this by using a fixed number of iterations for the newton method.
+The implementation of both algorithms was tested with the Rosenbrock-function, which has its minimum at $x_\text{min}^T=(1,1)$.
+The contour-plot of the gradient descent is shown in figure\ref{fig:gd} and the contour-plot of the conjugate gradient method is shown in figure\ref{fig:cgd}.
+The errors of both tests were calculated with the $L_2$ norm and are shown in figure\ref{fig:gd_err} and \ref{fig:cgd_err}.
+
+\subsection{b)}
+The implementation from a) is suboptimal, so the results are not meaningful.
+The conjugate gradient method returned $x_\text{min1}^T = (3.82185e+43,-1.7935e+43)$ for the first starting point, $x_\text{min2}^T = (-1.38094,-1.84969)$ for the second starting point and $x_\text{min3}^T = (0.711773,0.515736)$ for the third one. 
+
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../code/build/ex02gd.pdf}
+    \caption{Contour-plot of the gradient descent with the starting point set at $x_0^T=(-1,-1)$.}
+    \label{fig:gd}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../code/build/ex02cgd.pdf}
+    \caption{Contour-plot of the conjugate gradient method with the starting point set at $x_0^T=(-1,-1)$.}
+    \label{fig:cgd}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../code/build/ex02gd_err.pdf}
+    \caption{Error of the gradient descent.}
+    \label{fig:gd_err}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../code/build/ex02cgd_err.pdf}
+    \caption{Error of the conjugate gradient method.}
+    \label{fig:cgd_err}
+\end{figure}
+
