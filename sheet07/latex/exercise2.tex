@@ -1,0 +1,73 @@
+\section{Runge-Kutta method}
+In this task, the Runge-Kutta method of 4th order is used to solve Newton's equation of motion for a particle. The force field is given by the force field of the harmonic oscillator
+\begin{align}
+    \vec{F}\left( \vec{r} \right) = - \vec{r} m \omega^2
+\end{align}
+and the Newton equation is given by:
+\begin{align}
+   m \ddot{\vec{r}} = \vec{F}.
+\end{align}
+This second-order ODE can be rewritten as a first-order ODE for the vector
+\begin{align}
+    \vec{y} = \begin{pmatrix}
+        \vec{r} \\
+        \vec{p}
+    \end{pmatrix}
+\end{align} 
+and the equations of motion:
+\begin{align}
+    \dot{\vec{r}} &= \vec{v} \\
+    \dot{\vec{v}} &=  \vec{F}\left( \vec{r} \right) / m.
+\end{align}
+The Runge-Kutta method of 4th order, without the error, is given by
+\begin{align}
+    \vec{y}_{n+1} = \vec{y}_n + \frac{1}{6} \left[ \vec{k}_1 + 2\vec{k}_2 + 2\vec{k}_3 + \vec{k}_4 \right].
+\end{align}
+
+\subsection{a)}
+The Runge-Kutta method is used, to solve the ODE for the initial conditions 
+\begin{align}
+    \vec{r}(0) &= \text{arbitrary} \\
+    \vec{v}(0) &= \vec{0}
+\end{align}
+exemplarily for one period $T=2\pi \sqrt{\frac{m}{k}} = 2\pi$. Fig.~\ref{fig:ex02_1_2d} shows the harmonic oscillation of the individual coordinates and velocities and Fig.~\ref{fig:ex02_a_1_3d} shows a 3d-plot of the oscillation. Since there is no initial velocity, the particle is moving on a straight line.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{../code/build/ex02_a_1_2d.pdf}
+    \caption{Oscillation for each component.}
+    \label{fig:ex02_1_2d}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{../code/build/ex02_a_1_3d.pdf}
+    \caption{Oscillation in 3d.}
+    \label{fig:ex02_a_1_3d}
+\end{figure}
+\noindent If the particle has an initial velocity, that is not parallel to the $\vec{r}$-vector, its individual components also oscillate. This time the particle is not moving on a straight line through the center, but its motion describes a circle aroung the center. Fig.~\ref{fig:ex02_a_2} shows a 3d-Plot of the particles motion.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{../code/build/ex02_a_2.pdf}
+    \caption{Oscillation in 3d.}
+    \label{fig:ex02_a_2}
+\end{figure}
+
+\subsection{b)}
+In this task, the step size is determined, so that the oscillator satisfies a tolerance limit $\epsilon = |\vec{r}_0  - \vec{r}_i| < 10^{-5}$ after $i=10$ oscillations. For an arbitrary choice of the initial vectors, the step size is given by $h = 1.3 \cdot 10^{-5}$, which yields a relative deviation of $\epsilon = 5.1\cdot 10^{-6}$.
+
+\subsection{c)}
+In this task, the total energy is calculated and visualized for a time period of $t=20$. For the sake of simplicity, the starting vectors are chosen to be:
+\begin{align}
+    \vec{r} &= (1,1,1)^{\text{T}} \\
+    \vec{v} &= (0,0,0)^{\text{T}}.
+\end{align}
+\noindent Fig.~\ref{fig:ex02_c} shows the total energy plotted against the kinetic and potential Energy of the particle. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{../code/build/ex02_c.pdf}
+    \caption{Oscillation in 3d.}
+    \label{fig:ex02_c}
+\end{figure}
