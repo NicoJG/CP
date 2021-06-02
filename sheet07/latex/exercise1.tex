@@ -1,3 +1,19 @@
-\section{...}
-
-\subsection{....}
+\section{The BFGS Method}
+ The BFGS method was implemented according by the lecture. 
+ The calculation of the stepsize was done by the backtracking linesearch, taken from the german wikipedia article for the gradient descent method\footnote{https://de.wikipedia.org/wiki/Gradientenverfahren} because our calculation of the stepsize from the last sheet was poorly implemented.
+ The three different ways to calculate $C_0$ are abbreviated as $C_a,C_b$ and $C_c$ in the following table, with the index for the corresponding calculations on the sheet.
+ \begin{table}[h]
+    \centering
+    \caption{Minima of the Rosenbrock and iteration count of the BFGS method calculated with the different starting matrices.}
+    \label{tab:freq}
+    \begin{tabular}{cccc}
+        \toprule
+        $C_0$ & iteration count & $x_1$ & $x_2$\\
+        \midrule
+        $C_a$ & $23$ & $0.333428$ & $0.111175$\\
+        $C_b$ & $21$ & $0.333331$ & $0.111107$\\
+        $C_c$ & $23$ & $0.333171$ & $0.111001$\\
+    \end{tabular}
+ \end{table}
+ The diagonal matrix, on whose diagonals the inverse diagonal elements of the Hessian matrix are located, took the fewest iteration steps.
+ All three initial matrices have returned minima in the same order of magnitude as the result of the BFGS method.
