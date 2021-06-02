@@ -2,6 +2,19 @@
  The BFGS method was implemented according by the lecture. 
  The calculation of the stepsize was done by the backtracking linesearch, taken from the german wikipedia article for the gradient descent method\footnote{https://de.wikipedia.org/wiki/Gradientenverfahren} because our calculation of the stepsize from the last sheet was poorly implemented.
  The three different ways to calculate $C_0$ are abbreviated as $C_a,C_b$ and $C_c$ in the following table, with the index for the corresponding calculations on the sheet.
+ a) The exact hessian matrix calculates to:
+ \begin{equation}
+   H = \begin{pmatrix} 1200x_1^2 - 400x_2+2 & -400x_1 \\ -400x_1 & 200 \end{pmatrix}
+ \end{equation}
+ The inverse calculates to:
+ \begin{equation}
+   C_a = \frac{1}{\text{det}(H)} \begin{pmatrix} 200 & 400x_1 \\ 400x_1 & 1200x_1^2 - 400x_2+2 \end{pmatrix}
+ \end{equation}
+ b) The diagonal matrix, on whose diagonals the inverse diagonal elements of the Hessian matrix are located, calculates to:
+  \begin{equation}
+  C_b = \begin{pmatrix} (1200x_1^2 - 400x_2+2)^{-1} & 0 \\ 0 & (200)^{-1} \end{pmatrix}
+ \end{equation}
+ c) a multiple of the unit matrix with a prefactor $f(\vec{x_0})$ was only calculated within the code.
  \begin{table}[h]
     \centering
     \caption{Minima of the Rosenbrock and iteration count of the BFGS method calculated with the different starting matrices.}
