@@ -1,0 +1,102 @@
+\section{MD simulation of a 2d Lennard-Jones fluid}
+The potential and the force of the Lennard-Jones interaction are given by:
+\begin{align}
+    V(r) &= 4 \epsilon \left[  \left( \frac{\sigma}{r} \right)^{12}  - \left( \frac{\sigma}{r} \right)^{6} \right] \\
+    F(\vec{r} ) &= 48 \epsilon \frac{ \vec{r}}{r^2} \left[  \left( \frac{\sigma}{r} \right)^{12}  - \frac{1}{2}\left( \frac{\sigma}{r} \right)^{6}  \right].
+\end{align} 
+For the simulation the magnitude $\epsilon$ of the vdW-interaction and the size of the atoms $\sigma$ are set to 1, so that length  are measured in units of $\sigma$ and energies or $k_\text{B}T$ are measured in units of $\epsilon$. The two-dimensional system is given by $A=L \times L$ and the cut-off in the force calculation is choosen to be $r_c = L/2$. For the integration the "velocity"-Verlet-Algorithm
+\begin{align}
+    \vec{r}_{n+1} &= \vec{r}_n + \vec{v}_n \cdot h + \frac{1}{2} \vec{a}_n \cdot h^2 \\
+    \vec{v}_{n+1} &= \vec{v}_n + \frac{1}{2} \left( \vec{a}_{n+1} + \vec{a}_n  \right) \cdot h
+\end{align}
+is used.
+\subsection{}
+The system consists of 16 particles that are initialized at the starting position
+\begin{align}
+    \vec{r}(0) = \frac{1}{8} ( 1 + 2n, 1 + 2m)L
+\end{align}
+and a box length of $L=8$ length units. The initial velocities are randomly choosen and rescaled, so that the center-of-mass velocity is 0 at the beginning. At the initialization the velocities are scaled by the temperature $T_0$ and the isokinetic thermostat:
+\begin{align}
+    \vec{v}_i = \alpha \cdot \vec{v}_i
+\end{align}
+with the scaling parameter:
+\begin{align}
+    \alpha = \sqrt{\frac{T_0}{T(t)}}
+\end{align}
+and the momentary temperature:
+\begin{align}
+    T(t) = \frac{2}{N_f} \sum_{i=1}^{N} \frac{v_i^2}{2}.
+\end{align}
+The Boltzmann constant and the mass of the particles are set to 1 and the degrees of freedom for the given system is $N_f = 2 \cdot 16 - 2$, because each particle has two translational degrees of freedom. The total energy at the initialization is given by:
+\begin{align}
+    E_{\text{tot}}(0) = E_{\text{pot}} + E_{\text{kin}}.
+\end{align}
+Fig.~\ref{fig:b_1} shows the system at the initialization.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{../code/build/b)R_init.pdf}
+    \caption{Particles positions at initialization.}
+    \label{fig:b_1}
+\end{figure}
+
+\subsection{}
+The initial temperature is set to $T(0) = \frac{2}{N_f} E_{\text{kin}}(0) = \frac{2}{15} \cdot 15 = 1$. For each time step the following observables are calculated:
+\begin{align}
+    \vec{v}_S(t) &= \frac{1}{N} \sum_{i=1}^N \vec{v}_i \\
+    E_{\text{pot}}(t) &= \sum_{i<j-1}^N V\left( | \vec{r}_i - \vec{r}_j |  \right) \\
+    E{\text{kin}}(t) &= \sum_{i=1}^N \frac{1}{2} \vec{v}^2 \\
+    T(t) &= \frac{E_{\text{kin}}}{15}
+\end{align}
+For each integration step, the sum of the energies and the temperature is divided by the corresponding time $t$, so that these values represent the zeitgemittelten obvservables (english word?). The pair correlation function is calculated according to the lecture and for each bin, with a total of $l$ bins, it follows:
+\begin{align}
+    g(\vec{r}_l) = \frac{P_l}{N \rho \Delta V},
+\end{align}
+whereas $P_l$ is the zeitgemittelte number of pairs in bin $l$. To safe iteration loops, the algorithm calculates $E_{\text{pot}}, P_l, \vec{a}$ using the the same vector $\vec{r}_{ij} = \vec{r}_i - \vec{r}_j$. The time step is set to $h = 0.01$ and the system is averaged over $10^5$ time steps. Fig.~\ref{fig:b_2}  shows the potential, kinetic and total energy, the center-of-mass velocity, the temperature and the pair correlation function of the system.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{../code/build/b)set.pdf}
+    \caption{The observables for $T=1$.}
+    \label{fig:b_2}
+\end{figure}
+
+\noindent The system equilibriates very fast (< 1000 time steps), the cms velocity is almost zero and just fluctuates, because of numerical unstabilities. As the temperature is calculated using the kinetic energy, it isn't constant. 
+
+\subsection{}
+Using the same number of time steps for averaging the system, the observables are calculated for the temperatures $T = 0.01, 1, 100$. For $T=100$ the particles are so fast, that the time step size has to be reduced to $h=0.001$ to avoid errors. Fig.~\ref{fig:b_3} shows the observables for $T=0.01$, Fig.~\ref{fig:b_4} the observables for $T=1$  and Fig.~\ref{fig:b_5} the observables for $T=100$.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{../code/build/c)set0.01.pdf}
+    \caption{The observables for $T=0.01$.}
+    \label{fig:b_3}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{../code/build/c)set1.pdf}
+    \caption{The observables for $T=1$.}
+    \label{fig:b_4}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{../code/build/c)set100.pdf}
+    \caption{The observables for $T=100$.}
+    \label{fig:b_5}
+\end{figure}
+
+\noindent The total energy of the system is conserved for all three starting temperatures. The temperature observables are showing only small fluctuations, according to the fluctuations in the kinetic energies. Using the pair correlation function to identify the phases, it can be seen that the systems with $T=0.01$ and $T=1$ are in a liquid phase (more than one maximum) and for $T=100$ in a gaseous phase (one maximum).
+
+
+\subsection{}
+In this exercise the isokinetic thermostat, mentioned in a), is used to fix the temperature at a constant value. Fig.~\ref{fig:b_6} shows the observables. As expected, the total energy is not conserved and according to the multiple ongoing maxima in the pair correlation function, the system is in a solid state.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{../code/build/d)set.pdf}
+    \caption{The observables for $T=0.01$ using an isothermic thermostat.}
+    \label{fig:b_6}
+\end{figure}
+
