@@ -48,11 +48,11 @@ The initial temperature is set to $T(0) = \frac{2}{N_f} E_{\text{kin}}(0) = \fra
     E{\text{kin}}(t) &= \sum_{i=1}^N \frac{1}{2} \vec{v}^2 \\
     T(t) &= \frac{E_{\text{kin}}}{15}
 \end{align}
-For each integration step, the sum of the energies and the temperature is divided by the corresponding time $t$, so that these values represent the zeitgemittelten obvservables (english word?). The pair correlation function is calculated according to the lecture and for each bin, with a total of $l$ bins, it follows:
+For each integration step, the sum of the energies and the temperature is divided by the corresponding time $t$, so that these values represent the time-averaged obvservables. The pair correlation function is calculated according by the lecture and for each bin, with a total of $l$ bins, it follows:
 \begin{align}
     g(\vec{r}_l) = \frac{P_l}{N \rho \Delta V},
 \end{align}
-whereas $P_l$ is the zeitgemittelte number of pairs in bin $l$. To safe iteration loops, the algorithm calculates $E_{\text{pot}}, P_l, \vec{a}$ using the the same vector $\vec{r}_{ij} = \vec{r}_i - \vec{r}_j$. The time step is set to $h = 0.01$ and the system is averaged over $10^5$ time steps. Fig.~\ref{fig:b_2}  shows the potential, kinetic and total energy, the center-of-mass velocity, the temperature and the pair correlation function of the system.
+whereas $P_l$ is the time-averaged number of pairs in bin $l$. To safe iteration loops, the algorithm calculates $E_{\text{pot}}, P_l, \vec{a}$ using the the same vector $\vec{r}_{ij} = \vec{r}_i - \vec{r}_j$. The time step is set to $h = 0.01$ and the system is averaged over $10^5$ time steps. Fig.~\ref{fig:b_2}  shows the potential, kinetic and total energy, the center-of-mass velocity, the temperature and the pair correlation function of the system.
 
 \begin{figure}[h]
     \centering
@@ -87,11 +87,11 @@ Using the same number of time steps for averaging the system, the observables ar
     \label{fig:b_5}
 \end{figure}
 
-\noindent The total energy of the system is conserved for all three starting temperatures. The temperature observables are showing only small fluctuations, according to the fluctuations in the kinetic energies. Using the pair correlation function to identify the phases, it can be seen that the systems with $T=0.01$ and $T=1$ are in a liquid phase (more than one maximum) and for $T=100$ in a gaseous phase (one maximum).
+\noindent The total energy of the system is conserved for all three starting temperatures. The temperature observables are showing only small fluctuations, according by the fluctuations in the kinetic energies. Using the pair correlation function to identify the phases, it can be seen that the systems with $T=0.01$ and $T=1$ are in a liquid phase (more than one maximum) and for $T=100$ in a gaseous phase (one maximum).
 
 
 \subsection{}
-In this exercise the isokinetic thermostat, mentioned in a), is used to fix the temperature at a constant value. Fig.~\ref{fig:b_6} shows the observables. As expected, the total energy is not conserved and according to the multiple ongoing maxima in the pair correlation function, the system is in a solid state.
+In this exercise the isokinetic thermostat, as mentioned in a), is used to fix the temperature at a constant value. Fig.~\ref{fig:b_6} shows the observables. As expected, the total energy is not conserved and according by the multiple ongoing maxima in the pair correlation function, the system is in a solid state.
 
 \begin{figure}[h]
     \centering

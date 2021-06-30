@@ -1,2 +1,16 @@
 \setcounter{section}{-1}
 \section{Comprehension questions}
+\subsection{Advantages and disandvantages of MD simulation}
+A great advantage is the reproducibility of a simulated system.
+In addition, extreme conditions can be generated, which are difficult to implement in the laboratory.
+The classical MD simulation does not consider electrical effects and chemical reactions.
+The Verlet algorithm is also not very accurate.
+\subsection{Reasons to use the Verlet algorithm}
+The algorithms from the previous sheet are very computationally intensive for N particle systems.
+The verlet algorithm is used because it fulfills the requirement of as few computations of $\vec{f}$ as possible.
+\subsection{Boundary conditions}
+
+The boundary conditions can be set via an external repulsive wall potential or via periodic boundary conditions. 
+The periodic boundary conditions are mostly preferred, because they allow to simulate a quasi infinite system.
+Two problems arise here. A particle which moves out of the image has to be inserted correctly on the other side. When calculating the pair interaction it has to be taken care that a particle $i$ interacts not only with another particle $j$ but also with all periodic images of the particle $j$.
+This is difficult to realize for long range potentials like the Coulomb potential. 
