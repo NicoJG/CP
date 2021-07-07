@@ -1,0 +1,29 @@
+\section{Monte Carlo Simulation of a single Spin}
+
+The Metropolis algorithm is used to simulate a single spin $\sigma = \pm 1$ with the energy
+\begin{equation}
+\mathcal{H} = - \sigma H 
+\end{equation}
+in the external magnetic field $H$.
+The Metropolis algorithm is implemented according by the script:
+\begin{itemize}
+\item 1. draw at random if the spin is either 1 or -1
+\item 2. calculate $\Delta E = \mathcal{H}(j) - \mathcal{H}(i)$
+    \begin{itemize}
+        \item if $\Delta E < 0$ accept the result
+        \item if $\Delta E > 0$
+            \begin{itemize}
+            \item draw a uniform distributed number $p \in [0,1]$
+            \item if $p < e^{-\beta \Delta E}$ accept the result
+            \end{itemize}
+    \end{itemize}
+\item 3. if the result was accepted we have a new state otherwise we keep the old state    
+\end{itemize}
+This is repeated for $N = 10^5$ steps for $10^4$ values of $H \in [-5,5]$.
+The numerical calculation of $m = <s_n> $ is plotted  against $H$ as well as the analytical value of $m = \text{tanh}(\beta H)$ in Figure\ref{fig:1}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{../code/build/ex01_plot.pdf}
+    \label{fig:1}
+\end{figure}
